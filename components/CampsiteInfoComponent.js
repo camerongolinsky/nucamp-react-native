@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList } from 'react-native';
+import { Text, View, ScrollView, FlatList,
+    Modal, Button, StyleSheet } from 'react-native';
 import { Card, Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
@@ -28,15 +29,25 @@ function RenderCampsite(props){
                 <Text style={{margin:10}}>
                     {campsite.description}
                 </Text>
-                <Icon
-                    name={props.favorite ? 'heart' :'heart-o'}
-                    type='font-awesome' 
-                    color='#f50'
-                    raised
-                    reverse
-                    onPress={() => props.favorite ? 
-                        console.log('Already set as a favorite!') : props.markFavorite()}
-                />
+                <View>
+                    <Icon
+                        name={props.favorite ? 'heart' :'heart-o'}
+                        type='font-awesome' 
+                        color='#f50'
+                        raised
+                        reverse
+                        onPress={() => props.favorite ? 
+                            console.log('Already set as a favorite!') : props.markFavorite()}
+                    />
+                    <Icon
+                        name={props.favorite ? 'pencil' :'pencil-o'}
+                        type='font-awesome' 
+                        color='#5637DD'
+                        raised
+                        reverse
+                        onPress={() => props.onShowModal()} 
+                    />
+                </View>
             </Card>
         )
     }
@@ -65,7 +76,18 @@ function RenderComments({comments}){
 }
 
 class CampsiteInfo extends Component {
-    
+    constructor(props){
+        super(props);
+
+        this.state = {
+            showModal: false
+        }
+    }
+
+    toggleModal(){
+        set.State({showModal: !this.state.shoModal})
+    }
+
     markFavorite(campsiteId){
         this.props.postFavorite(campsiteId);
     }
@@ -82,9 +104,27 @@ class CampsiteInfo extends Component {
         <ScrollView>
             <RenderCampsite campsite={campsite} 
                 favorite={this.props.favorites.includes(campsiteId)}
-                markFavorite={() => this.markFavorite(campsiteId)}    
+                markFavorite={() => this.markFavorite(campsiteId)}
+                onShowModal={() => this.toggleModal()}    
             />
             <RenderComments comments={comments} />
+            <Modal
+                    animationType={'slide'}
+                    transparent={false}
+                    visible={this.state.showModal}
+                    onRequestClose={() => this.toggleModal()}
+                >
+                    <View style={styles.modal}>
+                        <View>
+                            <Button 
+                                onPress={() => this.props.toggleModal()}
+                                color='#808080'
+                                title='Cancel'
+                            />
+                        </View>
+                    </View>
+
+                </Modal>
         </ScrollView>
         )
     }
