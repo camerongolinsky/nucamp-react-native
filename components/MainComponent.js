@@ -138,7 +138,7 @@ const ReservationNavigator = createStackNavigator(
     }
 );
 
-const FavoritesnNavigator = createStackNavigator(
+const FavoritesNavigator = createStackNavigator(
     {
         Favorites: { screen: Favorites }
     },

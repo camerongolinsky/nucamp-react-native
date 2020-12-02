@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Flatlist, View, Text, StyleSheet, Alert } from 'react-native';
+import { FlatList, View, Text, StyleSheet, Alert } from 'react-native';
 import { ListItem } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { Loading } from './LoadingComponent';
@@ -38,12 +38,12 @@ class Favorites extends Component{
                                     'Delete Favorite?',
                                     'Are you sure you wish to delete the favorite campsite ' + 
                                         item.name + 
-                                        '?'
+                                        '?',
                                     [
                                         {
                                             text: 'Cancel',
                                             onPress: () => console.log(item.name + 'Not Deleted'),
-                                            style= 'cancel'
+                                            style: 'cancel'
                                         },
                                         {
                                             text: 'OK',
@@ -80,7 +80,7 @@ class Favorites extends Component{
             );
         }
         return (
-            <Flatlist
+            <FlatList
                 data={this.props.campsites.campsites.filter(
                     campsite => this.props.favorites.includes(campsite.id)
                 )}
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     },
     deleteTouchable: {
         backgroundColor: 'red',
-        heigh: '100%',
+        height: '100%',
         justifyContent: 'center'
     },
     deleteText: {
@@ -109,7 +109,7 @@ const styles = StyleSheet.create({
         fontWeight: '700',
         textAlign: 'center',
         fontSize: 16,
-        width: '100' 
+        width: 100 
     }
 });
 
