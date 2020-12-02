@@ -39,22 +39,7 @@ function RenderItem(props){
         );
     }
     return <View />
-}
-
-animate(){
-    Animated.timing(
-        this.state.scaleValue,
-        {
-            toValue: 1, 
-            duration: 1500, 
-            useNativeDriver: true
-        } 
-    ).start();
-}
-
-componentDidMount() {
-    this.animate();
-}
+};
 
 class Home extends Component {
     constructor(props){
@@ -65,6 +50,20 @@ class Home extends Component {
         };
     }
 
+    animate(){
+        Animated.timing(
+            this.state.scaleValue,
+            {
+                toValue: 1, 
+                duration: 1500, 
+                useNativeDriver: true
+            } 
+        ).start();
+    }
+    
+    componentDidMount() {
+        this.animate();
+    }
     static navigationOptions = {
         title: 'Home'
     }

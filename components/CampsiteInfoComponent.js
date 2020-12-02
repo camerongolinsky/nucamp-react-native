@@ -5,6 +5,7 @@ import { Card, Icon, Rating, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { baseUrl } from '../shared/baseUrl';
 import { postFavorite, postComment } from '../redux/ActionCreators'; 
+import * as Animatable from 'react-native-animatable';
 
 const mapStateToProps = state => {
     return {
@@ -23,7 +24,7 @@ function RenderCampsite(props){
     
     const {campsite} = props;
     if (campsite){
-        return (
+        return ( 
             <Animatable.View animation='fadeInDown' duration={2000} delay={1000}>
                 <Card  
                     featuredTitle={campsite.name}
