@@ -129,7 +129,7 @@ function RenderCampsite(props) {
               raised
               reverse
               onPress={() => shareCampsite(campsite.name, campsite.description,
-                baseUrl + campsite.image)
+                baseUrl + campsite.image)}
             />  
           </View>
         </Card>
